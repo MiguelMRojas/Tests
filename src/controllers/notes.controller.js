@@ -33,11 +33,14 @@
     res.render('../views/notes/all-note.hbs', {notes})
   }
 
-  notesCtrl.renderEditForm = (req, res) => {
-    res.send('render edit form')
+  notesCtrl.renderEditForm = async (req, res) => {
+    const note = await Note.findById(req.params.id).lean();
+
+    res.render('../views/notes/edit-note.hbs', {note});
   }
 
   notesCtrl.updateNote = (req, res) => {
+    console.log(req.body)
     res.send('Update note')
   }
 
