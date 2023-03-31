@@ -12,7 +12,6 @@ router.post('/notes/new-note', createNewNote)
 
 
 //Get all
-
 router.get('/notes',renderNotes )
 
 //Edit Notes

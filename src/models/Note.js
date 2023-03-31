@@ -8,6 +8,27 @@ const NoteSchema = new Schema ({
   description: {
     type: String,
     required: true
+  },
+  nombres: {
+    type: String,
+    required: true
+  },
+  apellidos: {
+    type: String,
+    required: true
+  },
+  cedula: {
+    type: Number,
+    required: true
+  },
+  genero: {
+    type: String,
+    enum: ['Hombre', 'Mujer'],
+    required: true
+  },
+  edad: {
+    type: Number,
+    required: true
   }
 }, {
   timestamps: true
