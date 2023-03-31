@@ -20,7 +20,7 @@
     });
     try {
       const savedNote = await newNote.save();
-      res.send('Nota guardada');
+      res.redirect('/notes');
     } catch (err) {
       console.log(err);
       res.status(500).send('Error saving note to database');
@@ -28,8 +28,9 @@
   };
 
 
-  notesCtrl.renderNotes = (req, res) => {
-    res.send('Total')
+  notesCtrl.renderNotes = async (req, res) => {
+    const notes =  await Note.find().lean();
+    res.render('../views/notes/all-note.hbs', {notes})
   }
 
   notesCtrl.renderEditForm = (req, res) => {
@@ -41,8 +42,10 @@
   }
 
 
-  notesCtrl.deletenote  = (req, res) => {
-    res.send('Delete note')
+  notesCtrl.deletenote  = async (req, res) => {
+    await Note.findByIdAndDelete(req.params.id);
+
+    res.redirect('/notes')
   }
 
   module.exports = notesCtrl;
