@@ -2,10 +2,11 @@ const notesCtrl = {};
 
 
 notesCtrl.renderNoteForm = (req, res) =>{
-  res.send('note')
+  res.render('notes/new-note')
 }
 
 notesCtrl.createNewNote = (req, res) => {
+  console.log(req.body)
   res.send('new registro')
 }
 
@@ -19,6 +20,11 @@ notesCtrl.renderEditForm = (req, res) => {
 
 notesCtrl.updateNote = (req, res) => {
   res.send('Update note')
+}
+
+
+notesCtrl.deletenote  = (req, res) => {
+  res.send('Delete note')
 }
 
 module.exports = notesCtrl;
