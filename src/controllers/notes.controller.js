@@ -20,6 +20,7 @@
     });
     try {
       const savedNote = await newNote.save();
+      req.flash('success_msg', 'Register Added Successfully')
       res.redirect('/notes');
     } catch (err) {
       console.log(err);
@@ -35,18 +36,20 @@
 
   notesCtrl.renderEditForm = async (req, res) => {
     const note = await Note.findById(req.params.id).lean();
-
-    res.render('../views/notes/edit-note.hbs', {note});
+    res.render("notes/edit-note",{note});
   }
 
-  notesCtrl.updateNote = (req, res) => {
-    console.log(req.body)
-    res.send('Update note')
+  notesCtrl.updateNote = async (req, res) => {
+    const {title,description,nombres,apellidos,cedula,edad} = req.body;
+    await Note.findByIdAndUpdate(req.params.id,{title,description,nombres,apellidos,cedula,edad} )
+    req.flash('success_msg', 'Register Update Successfully');
+    res.redirect('/notes');
   }
 
 
   notesCtrl.deletenote  = async (req, res) => {
     await Note.findByIdAndDelete(req.params.id);
+    req.flash('success_msg', 'Register Delete Successfully');
 
     res.redirect('/notes')
   }
